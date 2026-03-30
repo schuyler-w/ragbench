@@ -20,14 +20,16 @@ Question: {question}
 Answer:"""
 
 class RAGPipeline:
-    def __init__(self):
-        print(f"Loading embedding model...")
-        self.embedder = SentenceTransformer(EMBED_MODEL, device=DEVICE)
-        self.ollama_model = OLLAMA_MODEL
-
+    def __init__(self,
+             embed_model=EMBED_MODEL,
+             ollama_model=OLLAMA_MODEL,
+             collection_name=COLLECTION):
+        print(f"Loading embedding model: {embed_model}")
+        self.embedder = SentenceTransformer(embed_model, device=DEVICE)
+        self.ollama_model = ollama_model
         client = chromadb.PersistentClient(path=CHROMA_DIR)
-        self.collection = client.get_collection(COLLECTION)
-        print(f"Connected to collection: {COLLECTION} ({self.collection.count():,} chunks)")
+        self.collection = client.get_collection(collection_name)
+        print(f"Connected to collection: {collection_name} ({self.collection.count():,} chunks)")
 
     def retrieve(self, query: str, k: int = TOP_K):
         query_emb = self.embedder.encode(

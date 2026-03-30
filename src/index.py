@@ -8,26 +8,25 @@ CHROMA_DIR = "./chroma_db"
 COLLECTION = "wikipedia"
 BATCH_SIZE = 5000
 
-def build_index():
+def build_index(emb_path=EMB_PATH, meta_path=META_PATH, text_path=TEXT_PATH, collection_name=COLLECTION):
     client = chromadb.PersistentClient(path=CHROMA_DIR)
 
     try:
-        client.delete_collection(COLLECTION)
-        print(f"Dropped existing collection: {COLLECTION}")
+        client.delete_collection(collection_name)
+        print(f"Dropped existing collection: {collection_name}")
     except Exception:
         pass
 
     collection = client.create_collection(
-        name=COLLECTION,
+        name=collection_name,
         metadata={"hnsw:space": "cosine"}
     )
 
     print("Loading embeddings...")
-    embeddings = np.load(EMB_PATH)
+    embeddings = np.load(emb_path)
 
     metadata, texts = [], []
-    with open(META_PATH, encoding="utf-8") as fm, \
-         open(TEXT_PATH, encoding="utf-8") as ft:
+    with open(meta_path, encoding="utf-8") as fm, open(text_path, encoding="utf-8") as ft: 
         for ml, tl in zip(fm, ft):
             metadata.append(json.loads(ml))
             texts.append(json.loads(tl))

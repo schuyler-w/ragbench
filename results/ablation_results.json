@@ -1,0 +1,80 @@
+[
+  {
+    "recall@1": 0.474,
+    "recall@3": 0.664,
+    "recall@5": 0.726,
+    "recall@10": 0.768,
+    "mrr": 0.5793,
+    "config": {
+      "name": "baseline",
+      "chunk_size": 256,
+      "overlap": 32,
+      "model": "BAAI/bge-large-en-v1.5"
+    }
+  },
+  {
+    "recall@1": 0.086,
+    "recall@3": 0.154,
+    "recall@5": 0.188,
+    "recall@10": 0.222,
+    "mrr": 0.1263,
+    "config": {
+      "name": "small_chunks",
+      "chunk_size": 128,
+      "overlap": 16,
+      "model": "BAAI/bge-large-en-v1.5"
+    }
+  },
+  {
+    "recall@1": 0.116,
+    "recall@3": 0.178,
+    "recall@5": 0.204,
+    "recall@10": 0.242,
+    "mrr": 0.1543,
+    "config": {
+      "name": "large_chunks",
+      "chunk_size": 512,
+      "overlap": 64,
+      "model": "BAAI/bge-large-en-v1.5"
+    }
+  },
+  {
+    "recall@1": 0.238,
+    "recall@3": 0.342,
+    "recall@5": 0.388,
+    "recall@10": 0.438,
+    "mrr": 0.3003,
+    "config": {
+      "name": "no_overlap",
+      "chunk_size": 256,
+      "overlap": 0,
+      "model": "BAAI/bge-large-en-v1.5"
+    }
+  },
+  {
+    "recall@1": 0.494,
+    "recall@3": 0.662,
+    "recall@5": 0.73,
+    "recall@10": 0.764,
+    "mrr": 0.588,
+    "config": {
+      "name": "gte_large",
+      "chunk_size": 256,
+      "overlap": 32,
+      "model": "thenlper/gte-large"
+    }
+  },
+  {
+    "recall@1": 0.488,
+    "recall@3": 0.662,
+    "recall@5": 0.712,
+    "recall@10": 0.756,
+    "mrr": 0.5819,
+    "config": {
+      "name": "mxbai",
+      "chunk_size": 256,
+      "overlap": 32,
+      "model": "mixedbread-ai/mxbai-embed-large-v1"
+    }
+  }
+]
